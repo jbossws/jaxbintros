@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- ====================================================================== -->
+<!--                                                                        -->
+<!--  JBoss, the OpenSource J2EE webOS                                      -->
+<!--                                                                        -->
+<!--  Distributable under LGPL license.                                     -->
+<!--  See terms of license at http://www.gnu.org.                           -->
+<!--                                                                        -->
+<!-- ====================================================================== -->
+
+<!-- $Id$ -->
+
+<project default="main" basedir="." name="JBossWS-JBoss42">
+
+  <import file="${basedir}/ant-import/build-setup.xml"/>
+  <import file="${basedir}/ant-import/build-release.xml"/>
+  <import file="${basedir}/ant-import/build-thirdparty.xml"/>
+
+  <property file="${basedir}/ant.properties"/>
+  <property file="${basedir}/version.properties"/>
+
+
+  <!-- ================================================================== -->
+  <!-- Setup                                                              -->
+  <!-- ================================================================== -->
+
+  <property name="jaxbintro.dir" value="${basedir}"/>
+  <property name="jaxbintro.src.dir" value="${jaxbintro.dir}/src/main"/>
+  <property name="jaxbintro.etc.dir" value="${jaxbintro.src.dir}/etc"/>
+  <property name="jaxbintro.java.dir" value="${jaxbintro.src.dir}/java"/>
+  <property name="jaxbintro.resources.dir" value="${jaxbintro.src.dir}/resources"/>
+  <property name="jaxbintro.output.dir" value="${jaxbintro.dir}/output"/>
+  <property name="jaxbintro.output.apidocs.dir" value="${jaxbintro.output.dir}/apidocs"/>
+  <property name="jaxbintro.output.classes.dir" value="${jaxbintro.output.dir}/classes"/>
+  <property name="jaxbintro.output.etc.dir" value="${jaxbintro.output.dir}/etc"/>
+  <property name="jaxbintro.output.lib.dir" value="${jaxbintro.output.dir}/lib"/>
+
+  <property name="tests.java.dir" value="${jaxbintro.dir}/src/test/java"/>
+  <property name="tests.output.dir" value="${jaxbintro.output.dir}/tests"/>
+
+  <!-- ================================================================== -->
+  <!-- Initialization                                                     -->
+  <!-- ================================================================== -->
+
+  <target name="init" depends="prepare,thirdparty-get">
+
+  </target>
+
+  <!-- ================================================================== -->
+  <!-- Compile                                                            -->
+  <!-- ================================================================== -->
+
+  <!--
+  | Compile everything.
+  |
+  | This target should depend on other compile-* targets for each
+  | different type of compile that needs to be performed, short of
+  | documentation compiles.
+  -->
+
+  <target name="compile" depends="init,compile-classes,compile-etc" description="Compile all source files."/>
+
+  <!-- Compile integration java sources -->
+  <target name="compile-classes" depends="init, thirdparty-classpath">
+    <mkdir dir="${jaxbintro.output.classes.dir}"/>
+
+    <!--main sources -->
+    <javac srcdir="${jaxbintro.java.dir}" sourcepath="" destdir="${jaxbintro.output.classes.dir}"
+           encoding="utf-8" debug="${javac.debug}" verbose="${javac.verbose}"
+           deprecation="${javac.deprecation}" failonerror="${javac.fail.onerror}">
+      <include name="org/jboss/jaxb/**"/>
+      <classpath refid="jaxbintro.integration.classpath"/>
+    </javac>
+
+    <!-- tests -->
+    <mkdir dir="${tests.output.dir}/classes"/>
+    <javac srcdir="${tests.java.dir}" sourcepath="" destdir="${tests.output.dir}/classes"
+           encoding="utf-8" debug="${javac.debug}" verbose="${javac.verbose}"
+           deprecation="${javac.deprecation}" failonerror="${javac.fail.onerror}">
+      <include name="org/jboss/jaxb/**"/>
+      <classpath>
+        <path location="${jaxbintro.output.classes.dir}"/>
+      </classpath>
+      <classpath refid="jaxbintro.integration.classpath"/>
+    </javac>
+    <copy todir="${tests.output.dir}/classes">
+      <fileset dir="${tests.java.dir}" includes="**/*.xml"></fileset>
+    </copy>
+
+  </target>
+
+  <!-- Compile etc files (manifests and such) -->
+  <target name="compile-etc" depends="init">
+    <mkdir dir="${jaxbintro.output.etc.dir}"/>
+    <copy todir="${jaxbintro.output.etc.dir}" filtering="yes" overwrite="true">
+      <fileset dir="${jaxbintro.etc.dir}">
+        <include name="default.mf"/>
+      </fileset>
+      <filterset>
+        <filter token="java.vm.version" value="${java.vm.version}"/>
+        <filter token="java.vm.vendor" value="${java.vm.vendor}"/>
+        <filter token="build.id" value="${build.id}"/>
+        <filter token="implementation.version" value="jbossws-${version.id}"/>
+        <filtersfile file="${jaxbintro.dir}/version.properties"/>
+      </filterset>
+    </copy>
+  </target>
+
+
+  <!-- TEST -->
+
+  <target name="test" depends="compile">
+    <mkdir dir="${tests.output.dir}"/>
+    <mkdir dir="${tests.output.dir}/reports"/>
+
+    <junit printsummary="yes" haltonfailure="yes">
+      <classpath>
+        <path refid="jaxbintro.integration.classpath"/>
+        <pathelement location="${tests.output.dir}/classes"/>
+        <pathelement location="${jaxbintro.output.classes.dir}"/>
+      </classpath>
+
+      <formatter type="plain"/>
+
+      <batchtest fork="yes" todir="${tests.output.dir}/reports">
+        <fileset dir="${tests.java.dir}">
+          <include name="**/*UnitTest*.java"/>
+          <exclude name="**/AllTests.java"/>
+        </fileset>
+      </batchtest>
+    </junit>
+  </target>
+
+  <!-- ================================================================== -->
+  <!-- Archives                                                           -->
+  <!-- ================================================================== -->
+
+  <!--
+  | Build all jar files.
+  -->
+  <target name="jars"  depends="compile,module-jars" description="Builds all jar files.">
+  </target>
+
+  <!--
+  |  Build all jar files.
+  -->
+  <target name="module-jars" depends="init">
+
+    <!-- Build jbossws-jboss42.jar -->
+    <mkdir dir="${jaxbintro.output.lib.dir}"/>
+    <jar jarfile="${jaxbintro.output.lib.dir}/jboss-jaxb-intros.jar" manifest="${jaxbintro.output.etc.dir}/default.mf">
+      <fileset dir="${jaxbintro.output.classes.dir}">
+        <include name="org/jboss/jaxb/**"/>
+      </fileset>
+      <metainf dir="${jaxbintro.resources.dir}/jboss-jaxb-intros.jar/META-INF"/>
+    </jar>
+
+    <!-- Build jbossws-jboss42-src.zip -->
+    <zip zipfile="${jaxbintro.output.lib.dir}/jboss-jaxb-intro-src.zip" >
+      <fileset dir="${jaxbintro.java.dir}"/>
+    </zip>
+
+  </target>
+
+  <!-- Generate the JavaDoc -->
+  <target name="javadoc" depends="init" description="Generate the Javadoc">
+
+    <mkdir dir="${jaxbintro.output.apidocs.dir}"/>
+    <javadoc destdir="${jaxbintro.output.apidocs.dir}" author="true" version="true" use="true" windowtitle="JBossWS API">
+      <classpath>
+        <path refid="jaxbintro.integration.classpath"/>
+      </classpath>
+      <packageset dir="${jaxbintro.java.dir}" defaultexcludes="yes">
+        <include name="org/jboss/jaxb/**"/>
+      </packageset>
+      <doctitle><![CDATA[<h1>JBoss Web Service Framework - JAXB intros</h1>]]></doctitle>
+      <tag name="todo" scope="all" description="To do:"/>
+    </javadoc>
+  </target>
+
+  <!-- ================================================================== -->
+  <!-- Miscellaneous                                                       -->
+  <!-- ================================================================== -->
+
+  <target name="clean" depends="prepare" description="Cleans up most generated files.">
+    <delete dir="${jaxbintro.output.dir}"/>
+  </target>
+
+  <target name="clobber" depends="clean" description="Cleans up all generated files.">
+    <delete dir="${jaxbintro.dir}/thirdparty"/>
+  </target>
+
+  <target name="main" description="Executes the default target (most)." depends="most"/>
+
+  <target name="most" description="Builds almost everything." depends="jars"/>
+
+  <target name="all" description="Create a distribution zip file" depends="main">
+  </target>
+
+</project>

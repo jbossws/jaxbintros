@@ -1,0 +1,51 @@
+<jxb:bindings version="1.0"
+              xmlns:jxb="http://java.sun.com/xml/ns/jaxb"
+              xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+    <jxb:bindings schemaLocation="src/main/resources/jaxb-intros.xsd" node="/xs:schema">
+        <jxb:schemaBindings>
+            <jxb:package name="org.jboss.jaxb.intros.configmodel">
+            </jxb:package>
+        </jxb:schemaBindings>
+
+        <jxb:bindings node="//xs:complexType[@name='Class']">
+            <jxb:class name="ClassIntroConfig">
+            </jxb:class>
+        </jxb:bindings>
+
+        <jxb:bindings node="//xs:complexType[@name='Field']">
+            <jxb:class name="FieldIntroConfig">
+            </jxb:class>
+        </jxb:bindings>
+
+        <jxb:bindings node="//xs:complexType[@name='Method']">
+            <jxb:class name="MethodIntroConfig">
+            </jxb:class>
+        </jxb:bindings>
+
+        <jxb:bindings node="//xs:complexType[@name='XmlType']">
+            <jxb:class name="XmlTypeIntro">
+            </jxb:class>
+        </jxb:bindings>
+
+        <jxb:bindings node="//xs:complexType[@name='XmlAccessorType']">
+            <jxb:class name="XmlAccessorTypeIntro"/>
+        </jxb:bindings>
+
+        <jxb:bindings node="//xs:complexType[@name='XmlRootElement']">
+            <jxb:class name="XmlRootElementIntro"/>
+        </jxb:bindings>
+
+        <jxb:bindings node="//xs:complexType[@name='XmlElement']">
+            <jxb:class name="XmlElementIntro">
+            </jxb:class>
+        </jxb:bindings>
+
+        <jxb:bindings node="//xs:complexType[@name='XmlAttribute']">
+            <jxb:class name="XmlAttributeIntro">
+            </jxb:class>
+        </jxb:bindings>
+
+    </jxb:bindings>
+    
+</jxb:bindings>

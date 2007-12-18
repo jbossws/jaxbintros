@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema
+        xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+        xmlns:jaxb-intros="http://www.jboss.org/xsd/jaxb/intros"
+        targetNamespace="http://www.jboss.org/xsd/jaxb/intros"
+        elementFormDefault="qualified">
+
+    <xsd:element name="jaxb-intros">
+        <xsd:annotation>
+            <xsd:documentation xml:lang="en">The jbossesb JAXB Annotation Introductions configuration.
+            </xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="jaxb-intros:Class" minOccurs="1" maxOccurs="unbounded"/>
+            </xsd:sequence>
+            <xsd:attribute name="default-namespace" use="optional"/>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:complexType name="Class">
+        <xsd:sequence>
+            <xsd:element ref="jaxb-intros:XmlAccessorType" minOccurs="0" maxOccurs="1"/>
+            <xsd:element ref="jaxb-intros:XmlType" minOccurs="0" maxOccurs="1"/>
+            <xsd:element ref="jaxb-intros:XmlRootElement" minOccurs="0" maxOccurs="1"/>
+            <xsd:element ref="jaxb-intros:Field" minOccurs="0" maxOccurs="unbounded"/>
+            <xsd:element ref="jaxb-intros:Method" minOccurs="0" maxOccurs="unbounded"/>
+        </xsd:sequence>
+        <xsd:attribute name="name" use="required"/>
+    </xsd:complexType>
+    <xsd:element name="Class" type="jaxb-intros:Class">
+        <xsd:annotation>
+            <xsd:documentation xml:lang="en">Java Top Level Class JAXB Annotation Introductions configuration.
+            </xsd:documentation>
+        </xsd:annotation>
+    </xsd:element>
+
+    <xsd:complexType name="class-member-intro-config">
+        <xsd:annotation>
+           <xsd:documentation xml:lang="en">Java Class Member (Field, Method Constructor) JAXB Annotation Introductions configuration base type.</xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element ref="jaxb-intros:XmlElement" minOccurs="0" maxOccurs="1"/>
+            <xsd:element ref="jaxb-intros:XmlAttribute" minOccurs="0" maxOccurs="1"/>
+        </xsd:sequence>
+        <xsd:attribute name="name" use="required"/>
+    </xsd:complexType>
+    <xsd:element name="class-member-intro-config" abstract="true" />
+
+    <xsd:complexType name="Field">
+        <xsd:complexContent>
+            <xsd:extension base="jaxb-intros:class-member-intro-config" />
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:element name="Field" type="jaxb-intros:Field" substitutionGroup="jaxb-intros:class-member-intro-config">
+        <xsd:annotation>
+            <xsd:documentation xml:lang="en">Java Class Field JAXB Annotation Introductions configuration.
+            </xsd:documentation>
+        </xsd:annotation>
+    </xsd:element>
+
+    <xsd:complexType name="Method">
+        <xsd:complexContent>
+            <xsd:extension base="jaxb-intros:class-member-intro-config" />
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:element name="Method" type="jaxb-intros:Method" substitutionGroup="jaxb-intros:class-member-intro-config">
+        <xsd:annotation>
+            <xsd:documentation xml:lang="en">Java Class Method JAXB Annotation Introductions configuration.
+            </xsd:documentation>
+        </xsd:annotation>
+    </xsd:element>
+
+    <xsd:complexType name="XmlAccessorType">
+        <xsd:attribute name="value" use="optional" default="NONE">
+            <xsd:simpleType>
+                <xsd:restriction base="xsd:NMTOKEN">
+                    <xsd:enumeration value="PROPERTY"/>
+                    <xsd:enumeration value="FIELD"/>
+                    <xsd:enumeration value="PUBLIC_MEMBER"/>
+                    <xsd:enumeration value="NONE"/>
+                </xsd:restriction>
+            </xsd:simpleType>
+        </xsd:attribute>
+    </xsd:complexType>
+    <xsd:element name="XmlAccessorType" type="jaxb-intros:XmlAccessorType" />
+
+    <xsd:complexType name="XmlRootElement">
+        <xsd:attribute name="namespace" use="optional" default="##default"/>
+        <xsd:attribute name="name" use="optional" default="##default"/>
+    </xsd:complexType>
+    <xsd:element name="XmlRootElement" type="jaxb-intros:XmlRootElement"/>
+
+    <xsd:complexType name="XmlType">
+        <xsd:attribute name="name" use="optional" default="##default"/>
+        <xsd:attribute name="propOrder" use="optional" default=""/>
+        <xsd:attribute name="namespace" use="optional" default="##default"/>
+        <xsd:attribute name="factoryClass" use="optional"/>
+        <xsd:attribute name="factoryMethod" use="optional" default=""/>
+    </xsd:complexType>
+    <xsd:element name="XmlType" type="jaxb-intros:XmlType">
+        <xsd:annotation>
+            <xsd:documentation xml:lang="en">JAXB 'XmlType' Annotation Introduction configuration.</xsd:documentation>
+        </xsd:annotation>
+    </xsd:element>
+
+    <xsd:complexType name="XmlElement">
+        <xsd:attribute name="name" use="optional" default="##default"/>
+        <xsd:attribute name="nillable" type="xsd:boolean" use="optional" default="false"/>
+        <xsd:attribute name="required" type="xsd:boolean" use="optional" default="false"/>
+        <xsd:attribute name="namespace" use="optional" default="##default"/>
+        <xsd:attribute name="defaultValue" use="optional"/>
+        <xsd:attribute name="type" use="optional"/>
+    </xsd:complexType>
+    <xsd:element name="XmlElement" type="jaxb-intros:XmlElement">
+        <xsd:annotation>
+            <xsd:documentation xml:lang="en">JAXB 'XmlElement' Annotation Introduction configuration.
+            </xsd:documentation>
+        </xsd:annotation>
+    </xsd:element>
+
+    <xsd:complexType name="XmlAttribute">
+        <xsd:attribute name="name" use="optional" default="##default"/>
+        <xsd:attribute name="required" type="xsd:boolean" use="optional" default="false"/>
+        <xsd:attribute name="namespace" use="optional" default="##default"/>
+    </xsd:complexType>
+    <xsd:element name="XmlAttribute" type="jaxb-intros:XmlAttribute">
+        <xsd:annotation>
+            <xsd:documentation xml:lang="en">JAXB 'XmlAttribute' Annotation Introduction configuration.
+            </xsd:documentation>
+        </xsd:annotation>
+    </xsd:element>
+
+</xsd:schema>
