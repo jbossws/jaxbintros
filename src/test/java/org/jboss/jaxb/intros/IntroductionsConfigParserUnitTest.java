@@ -19,6 +19,10 @@
  */
 package org.jboss.jaxb.intros;
 
+import java.io.File;
+import java.io.IOException;
+import java.net.URL;
+
 import junit.framework.TestCase;
 import org.jboss.jaxb.intros.configmodel.JaxbIntros;
 import org.jboss.jaxb.intros.configmodel.ClassIntroConfig;
@@ -28,8 +32,8 @@ import org.jboss.jaxb.intros.configmodel.ClassIntroConfig;
  */
 public class IntroductionsConfigParserUnitTest extends TestCase {
 
-    public void test() throws ConfigurationException {
-        JaxbIntros config = IntroductionsConfigParser.parseConfig(getClass().getResourceAsStream("intro-config-01.xml"));
+    public void test() throws ConfigurationException, IOException {
+        JaxbIntros config = IntroductionsConfigParser.parseConfig(new File("target/test-classes/intro-config-01.xml").toURL().openStream());
 
         assertEquals("http://jbossesb.x.jboss.org", config.getDefaultNamespace());
         assertEquals(2, config.getClazz().size());

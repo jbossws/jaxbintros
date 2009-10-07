@@ -31,6 +31,9 @@ import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
 import javax.xml.transform.stream.StreamSource;
+
+import java.io.File;
+import java.io.IOException;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.Map;
@@ -44,8 +47,8 @@ import com.sun.xml.bind.api.JAXBRIContext;
  */
 public class IntroductionsAnnotationReaderUnitTest extends TestCase {
 
-    public void test_annotation_intro() throws ConfigurationException, NoSuchMethodException, NoSuchFieldException {
-        JaxbIntros config = IntroductionsConfigParser.parseConfig(getClass().getResourceAsStream("intro-config-02.xml"));
+    public void test_annotation_intro() throws ConfigurationException, NoSuchMethodException, NoSuchFieldException, IOException {
+        JaxbIntros config = IntroductionsConfigParser.parseConfig(new File("target/test-classes/intro-config-02.xml").toURL().openStream());
         IntroductionsAnnotationReader reader = new IntroductionsAnnotationReader(config);
         Method testBean1Method = TestBean1.class.getMethod("getOrderDate");
         Field testBean2Field = TestBean2.class.getField("orderNumber");
@@ -72,8 +75,8 @@ public class IntroductionsAnnotationReaderUnitTest extends TestCase {
         assertEquals("http://jbossesb.org", xmlAttribute.namespace());
     }
 
-    public void test_jaxb_unmarshal() throws ConfigurationException, JAXBException {
-        JaxbIntros config = IntroductionsConfigParser.parseConfig(getClass().getResourceAsStream("intro-config-03.xml"));
+    public void test_jaxb_unmarshal() throws ConfigurationException, JAXBException, IOException {
+        JaxbIntros config = IntroductionsConfigParser.parseConfig(new File("target/test-classes/intro-config-03.xml").toURL().openStream());
         IntroductionsAnnotationReader reader = new IntroductionsAnnotationReader(config);
         Map<String, Object> jaxbConfig = new HashMap<String, Object>();
 
@@ -83,7 +86,7 @@ public class IntroductionsAnnotationReaderUnitTest extends TestCase {
         JAXBContext jaxbContext = JAXBContext.newInstance(new Class[] {CustomerOrder.class}, jaxbConfig);
         Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
 
-        JAXBElement jbe = unmarshaller.unmarshal(new StreamSource(getClass().getResourceAsStream("order-message.xml")), CustomerOrder.class);
+        JAXBElement jbe = unmarshaller.unmarshal(new StreamSource(new File("target/test-classes/order-message.xml").toURL().openStream()), CustomerOrder.class);
         CustomerOrder order = (CustomerOrder) jbe.getValue();
 
         assertNotNull("null Order", order);

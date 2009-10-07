@@ -4,18 +4,6 @@
 
     <artifact id="jboss-jaxb-intros.jar"/>
 
-    <import componentref="jboss/jbossws-native42">
-      <compatible version="@jbossws-native@"/>      
-    </import>
-    
-    <import componentref="jboss/jbossws-spi">
-      <compatible version="@jbossws-spi@"/>
-    </import>
-
-    <import componentref="sun-jaxb">
-      <compatible version="@sun-jaxb@"/>
-    </import>
-
     <export>
     </export>
 
