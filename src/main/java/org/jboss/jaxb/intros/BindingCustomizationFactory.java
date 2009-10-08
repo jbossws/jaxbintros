@@ -41,22 +41,33 @@ import com.sun.xml.bind.api.JAXBRIContext;
  */
 public class BindingCustomizationFactory
 {
-	public static Map<String, Object> getBindingCustomization(InputStream introsConfigStream)
-	{
-       return getBindingCustomization(introsConfigStream, null);
-	}
-	
-	public static Map<String, Object> getBindingCustomization(InputStream introsConfigStream, String namespace)
-	{
-       JaxbIntros jaxbIntros = IntroductionsConfigParser.parseConfig(introsConfigStream);
-       IntroductionsAnnotationReader annotationReader = new IntroductionsAnnotationReader(jaxbIntros);
-       String defaultNamespace = namespace != null ? namespace : jaxbIntros.getDefaultNamespace();
-       Map<String, Object> jaxbCustomizations = new HashMap<String, Object>();
+   public static Map<String, Object> getBindingCustomization(InputStream introsConfigStream)
+   {
+      return getBindingCustomization(introsConfigStream, null);
+   }
 
-       jaxbCustomizations.put(JAXBRIContext.ANNOTATION_READER, annotationReader);
-       if(defaultNamespace != null) {
-          jaxbCustomizations.put(JAXBRIContext.DEFAULT_NAMESPACE_REMAP, defaultNamespace);
-       }
-       return jaxbCustomizations;
-	}
+   public static Map<String, Object> getBindingCustomization(InputStream introsConfigStream, String namespace)
+   {
+      Map<String, Object> jaxbCustomizations = new HashMap<String, Object>();
+      populateBindingCustomization(introsConfigStream, namespace, jaxbCustomizations);
+      return jaxbCustomizations;
+   }
+   
+   public static void populateBindingCustomization(InputStream introsConfigStream, Map<String, Object> customization)
+   {
+      populateBindingCustomization(introsConfigStream, null, customization);
+   }
+
+   public static void populateBindingCustomization(InputStream introsConfigStream, String namespace, Map<String, Object> customization)
+   {
+      JaxbIntros jaxbIntros = IntroductionsConfigParser.parseConfig(introsConfigStream);
+      IntroductionsAnnotationReader annotationReader = new IntroductionsAnnotationReader(jaxbIntros);
+      String defaultNamespace = namespace != null ? namespace : jaxbIntros.getDefaultNamespace();
+
+      customization.put(JAXBRIContext.ANNOTATION_READER, annotationReader);
+      if (defaultNamespace != null)
+      {
+         customization.put(JAXBRIContext.DEFAULT_NAMESPACE_REMAP, defaultNamespace);
+      }
+   }
 }
