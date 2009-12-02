@@ -16,16 +16,16 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for XmlRootElement complex type.
+ * <p>Java class for XmlJavaTypeAdapter complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="XmlRootElement">
+ * &lt;complexType name="XmlJavaTypeAdapter">
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
- *       &lt;attribute name="namespace" type="{http://www.w3.org/2001/XMLSchema}anySimpleType" default="##default" />
- *       &lt;attribute name="name" type="{http://www.w3.org/2001/XMLSchema}anySimpleType" default="##default" />
+ *       &lt;attribute name="value" use="required" type="{http://www.w3.org/2001/XMLSchema}anySimpleType" />
+ *       &lt;attribute name="type" type="{http://www.w3.org/2001/XMLSchema}anySimpleType" />
  *     &lt;/restriction>
  *   &lt;/complexContent>
  * &lt;/complexType>
@@ -34,70 +34,62 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "XmlRootElement")
-public class XmlRootElementIntro {
+@XmlType(name = "XmlJavaTypeAdapter")
+public class XmlJavaTypeAdapterIntro {
 
+    @XmlAttribute(required = true)
+    @XmlSchemaType(name = "anySimpleType")
+    protected String value;
     @XmlAttribute
     @XmlSchemaType(name = "anySimpleType")
-    protected String namespace;
-    @XmlAttribute
-    @XmlSchemaType(name = "anySimpleType")
-    protected String name;
+    protected String type;
 
     /**
-     * Gets the value of the namespace property.
+     * Gets the value of the value property.
      * 
      * @return
      *     possible object is
      *     {@link String }
      *     
      */
-    public String getNamespace() {
-        if (namespace == null) {
-            return "##default";
-        } else {
-            return namespace;
-        }
+    public String getValue() {
+        return value;
     }
 
     /**
-     * Sets the value of the namespace property.
+     * Sets the value of the value property.
      * 
      * @param value
      *     allowed object is
      *     {@link String }
      *     
      */
-    public void setNamespace(String value) {
-        this.namespace = value;
+    public void setValue(String value) {
+        this.value = value;
     }
 
     /**
-     * Gets the value of the name property.
+     * Gets the value of the type property.
      * 
      * @return
      *     possible object is
      *     {@link String }
      *     
      */
-    public String getName() {
-        if (name == null) {
-            return "##default";
-        } else {
-            return name;
-        }
+    public String getType() {
+        return type;
     }
 
     /**
-     * Sets the value of the name property.
+     * Sets the value of the type property.
      * 
      * @param value
      *     allowed object is
      *     {@link String }
      *     
      */
-    public void setName(String value) {
-        this.name = value;
+    public void setType(String value) {
+        this.type = value;
     }
 
 }

@@ -4,7 +4,9 @@ import java.io.Serializable;
 
 public class CustomerOrder implements Serializable {
 
-    protected OrderHeader header;
+   private static final long serialVersionUID = 1L;
+
+   protected OrderHeader header;
 
     protected Item[] items;
 

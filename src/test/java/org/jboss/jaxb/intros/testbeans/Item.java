@@ -2,44 +2,82 @@ package org.jboss.jaxb.intros.testbeans;
 
 import java.io.Serializable;
 
-public class Item implements Serializable {
+public class Item implements Serializable
+{
 
-protected String partNumber;
+   private static final long serialVersionUID = 1L;
 
-protected String description;
+   protected String partNumber;
 
-protected int quantity;
+   protected String description;
 
-protected java.math.BigDecimal price;
+   protected int quantity;
 
-protected java.math.BigDecimal extensionAmount;
-public Item(){}
+   protected java.math.BigDecimal price;
 
-public Item(String partNumber, String description, int quantity, java.math.BigDecimal price, java.math.BigDecimal extensionAmount){
-this.partNumber=partNumber;
-this.description=description;
-this.quantity=quantity;
-this.price=price;
-this.extensionAmount=extensionAmount;
-}
-public String getPartNumber() { return partNumber ;}
+   protected java.math.BigDecimal extensionAmount;
 
-public void setPartNumber(String partNumber){ this.partNumber=partNumber; }
+   public Item()
+   {
+   }
 
-public String getDescription() { return description ;}
+   public Item(String partNumber, String description, int quantity, java.math.BigDecimal price, java.math.BigDecimal extensionAmount)
+   {
+      this.partNumber = partNumber;
+      this.description = description;
+      this.quantity = quantity;
+      this.price = price;
+      this.extensionAmount = extensionAmount;
+   }
 
-public void setDescription(String description){ this.description=description; }
+   public String getPartNumber()
+   {
+      return partNumber;
+   }
 
-public int getQuantity() { return quantity ;}
+   public void setPartNumber(String partNumber)
+   {
+      this.partNumber = partNumber;
+   }
 
-public void setQuantity(int quantity){ this.quantity=quantity; }
+   public String getDescription()
+   {
+      return description;
+   }
 
-public java.math.BigDecimal getPrice() { return price ;}
+   public void setDescription(String description)
+   {
+      this.description = description;
+   }
 
-public void setPrice(java.math.BigDecimal price){ this.price=price; }
+   public int getQuantity()
+   {
+      return quantity;
+   }
 
-public java.math.BigDecimal getExtensionAmount() { return extensionAmount ;}
+   public void setQuantity(int quantity)
+   {
+      this.quantity = quantity;
+   }
 
-public void setExtensionAmount(java.math.BigDecimal extensionAmount){ this.extensionAmount=extensionAmount; }
+   public java.math.BigDecimal getPrice()
+   {
+      return price;
+   }
+
+   public void setPrice(java.math.BigDecimal price)
+   {
+      this.price = price;
+   }
+
+   public java.math.BigDecimal getExtensionAmount()
+   {
+      return extensionAmount;
+   }
+
+   public void setExtensionAmount(java.math.BigDecimal extensionAmount)
+   {
+      this.extensionAmount = extensionAmount;
+   }
 
 }

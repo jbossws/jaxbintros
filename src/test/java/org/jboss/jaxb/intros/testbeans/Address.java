@@ -4,7 +4,9 @@ import java.io.Serializable;
 
 public class Address implements Serializable {
 
-    protected String street1;
+   private static final long serialVersionUID = 1L;
+
+   protected String street1;
 
     protected String street2;
 

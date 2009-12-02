@@ -19,26 +19,27 @@
  */
 package org.jboss.jaxb.intros;
 
-import junit.framework.TestCase;
-import org.jboss.jaxb.intros.configmodel.JaxbIntros;
-import org.jboss.jaxb.intros.testbeans.*;
-
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.Unmarshaller;
-import javax.xml.bind.JAXBElement;
-import javax.xml.bind.JAXBException;
-import javax.xml.transform.stream.StreamSource;
-
 import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
-import java.util.Map;
-import java.util.HashMap;
 import java.math.BigDecimal;
+import java.util.HashMap;
+import java.util.Map;
+
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBElement;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Unmarshaller;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlType;
+import javax.xml.transform.stream.StreamSource;
+
+import junit.framework.TestCase;
+
+import org.jboss.jaxb.intros.configmodel.JaxbIntros;
+import org.jboss.jaxb.intros.testbeans.CustomerOrder;
 
 import com.sun.xml.bind.api.JAXBRIContext;
 
@@ -86,7 +87,7 @@ public class IntroductionsAnnotationReaderUnitTest extends TestCase {
         JAXBContext jaxbContext = JAXBContext.newInstance(new Class[] {CustomerOrder.class}, jaxbConfig);
         Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
 
-        JAXBElement jbe = unmarshaller.unmarshal(new StreamSource(new File("target/test-classes/order-message.xml").toURL().openStream()), CustomerOrder.class);
+        JAXBElement<?> jbe = unmarshaller.unmarshal(new StreamSource(new File("target/test-classes/order-message.xml").toURL().openStream()), CustomerOrder.class);
         CustomerOrder order = (CustomerOrder) jbe.getValue();
 
         assertNotNull("null Order", order);

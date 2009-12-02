@@ -19,23 +19,48 @@
  */
 package org.jboss.jaxb.intros;
 
-import com.sun.xml.bind.v2.model.annotation.*;
-
-import java.lang.reflect.*;
 import java.lang.annotation.Annotation;
-import java.util.List;
+import java.lang.reflect.AnnotatedElement;
+import java.lang.reflect.Field;
+import java.lang.reflect.Member;
+import java.lang.reflect.Method;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.Map;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import java.util.regex.Pattern;
 
-import org.jboss.jaxb.intros.configmodel.*;
-import org.jboss.jaxb.intros.handlers.*;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
+import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
+import javax.xml.bind.annotation.XmlID;
+import javax.xml.bind.annotation.XmlIDREF;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
+import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.jboss.jaxb.intros.configmodel.ClassIntroConfig;
+import org.jboss.jaxb.intros.configmodel.ClassMemberIntroConfig;
+import org.jboss.jaxb.intros.configmodel.FieldIntroConfig;
+import org.jboss.jaxb.intros.configmodel.JaxbIntros;
+import org.jboss.jaxb.intros.configmodel.MethodIntroConfig;
+import org.jboss.jaxb.intros.handlers.ClassValue;
+import org.jboss.jaxb.intros.handlers.Handler;
+
+import com.sun.xml.bind.v2.model.annotation.AbstractInlineAnnotationReaderImpl;
+import com.sun.xml.bind.v2.model.annotation.Locatable;
+import com.sun.xml.bind.v2.model.annotation.LocatableAnnotation;
+import com.sun.xml.bind.v2.model.annotation.RuntimeAnnotationReader;
+import com.sun.xml.bind.v2.model.annotation.RuntimeInlineAnnotationReader;
 
 /**
  * JAXB Annotation Reader for the JAXB RI context interface.
@@ -45,7 +70,9 @@ import javax.xml.bind.annotation.XmlElement;
  * interfaces.
  *
  * @author <a href="mailto:tom.fennelly@jboss.com">tom.fennelly@jboss.com</a>
+ * @author <a href="mailto:stf@molindo.at">Stefan Fussenegger</a> 
  */
+@SuppressWarnings("unchecked")
 public class IntroductionsAnnotationReader extends AbstractInlineAnnotationReaderImpl<Type, Class, Field, Method> implements RuntimeAnnotationReader
 {
 
@@ -53,6 +80,28 @@ public class IntroductionsAnnotationReader extends AbstractInlineAnnotationReade
    private RuntimeAnnotationReader baseReader = new RuntimeInlineAnnotationReader();
    private JaxbIntros introductions;
 
+   public static Set<Class<? extends Annotation>> AVAILABLE_CLASS_ANNOTATIONS = IntroductionsAnnotationReader.<Class<? extends Annotation>>unmodifiableSet(
+		   XmlAccessorType.class,
+		   XmlType.class,
+		   XmlRootElement.class,
+		   XmlTransient.class,
+		   XmlJavaTypeAdapter.class   
+   );
+
+   public static Set<Class<? extends Annotation>> AVAILABLE_MEMBER_ANNOTATIONS = IntroductionsAnnotationReader.<Class<? extends Annotation>>unmodifiableSet(
+		   XmlElement.class,
+		   XmlAttribute.class,
+		   XmlTransient.class,
+		   XmlID.class,
+		   XmlIDREF.class,
+		   XmlElementWrapper.class,
+		   XmlJavaTypeAdapter.class
+   );
+
+   private static <T> Set<T> unmodifiableSet(T ... objects) {
+	   return Collections.unmodifiableSet(new HashSet<T>(Arrays.asList(objects)));
+   }
+   
    public IntroductionsAnnotationReader(JaxbIntros introductions)
    {
       if (introductions == null)
@@ -68,7 +117,7 @@ public class IntroductionsAnnotationReader extends AbstractInlineAnnotationReade
 
       if (proxy != null)
       {
-         return (A)proxy;
+         return annotation.cast(proxy);
       }
 
       return LocatableAnnotation.create(field.getAnnotation(annotation), srcPos);
@@ -88,16 +137,16 @@ public class IntroductionsAnnotationReader extends AbstractInlineAnnotationReade
 
    public Annotation[] getAllFieldAnnotations(Field field, Locatable srcPos)
    {
-      return getAllAnnotations(field, srcPos);
+      return getAllMemberAnnotations(field, srcPos);
    }
 
    public <A extends Annotation> A getMethodAnnotation(Class<A> annotation, Method method, Locatable srcPos)
    {
-      Annotation proxy = getProxy(annotation, method);
+      A proxy = annotation.cast(getProxy(annotation, method));
 
       if (proxy != null)
       {
-         return (A)proxy;
+         return proxy;
       }
 
       return LocatableAnnotation.create(method.getAnnotation(annotation), srcPos);
@@ -117,7 +166,7 @@ public class IntroductionsAnnotationReader extends AbstractInlineAnnotationReade
 
    public Annotation[] getAllMethodAnnotations(Method method, Locatable srcPos)
    {
-      return getAllAnnotations(method, srcPos);
+      return getAllMemberAnnotations(method, srcPos);
    }
 
    public <A extends Annotation> A getMethodParameterAnnotation(Class<A> annotation, Method method, int paramIndex, Locatable srcPos)
@@ -131,7 +180,7 @@ public class IntroductionsAnnotationReader extends AbstractInlineAnnotationReade
 
       if (proxy != null)
       {
-         return (A)proxy;
+         return annotation.cast(proxy);
       }
 
       return LocatableAnnotation.create(((Class<?>)clazz).getAnnotation(annotation), srcPos);
@@ -154,16 +203,16 @@ public class IntroductionsAnnotationReader extends AbstractInlineAnnotationReade
       return baseReader.getPackageAnnotation(a, clazz, srcPos);
    }
 
-   public Class getClassValue(Annotation a, String name)
+   public Class<?> getClassValue(Annotation a, String name)
    {
       if (a instanceof ClassValue)
       {
          return ((ClassValue)a).getClassValue(a, name);
       }
-      return (Class)baseReader.getClassValue(a, name);
+      return (Class<?>)baseReader.getClassValue(a, name);
    }
 
-   public Class[] getClassArrayValue(Annotation a, String name)
+   public Class<?>[] getClassArrayValue(Annotation a, String name)
    {
       if (a instanceof ClassValue)
       {
@@ -177,7 +226,7 @@ public class IntroductionsAnnotationReader extends AbstractInlineAnnotationReade
       return m.getDeclaringClass().getName() + '#' + m.getName();
    }
 
-   private ClassIntroConfig getClassIntroConfig(Class clazz)
+   private ClassIntroConfig getClassIntroConfig(Class<?> clazz)
    {
       String className = clazz.getName();
       ClassIntroConfig globalIntro = null;
@@ -268,95 +317,48 @@ public class IntroductionsAnnotationReader extends AbstractInlineAnnotationReade
       return pattern.matcher(string).matches();
    }
 
-   private Annotation getMemberAnnotationProxy(Class annotation, ClassMemberIntroConfig memberIntroConfig)
+   private <T extends Annotation> T getMemberAnnotationProxy(Class<T> annotationType, ClassMemberIntroConfig memberIntroConfig)
    {
-      Annotation proxy = null;
-
-      if (annotation == javax.xml.bind.annotation.XmlAttribute.class)
-      {
-         XmlAttributeIntro xmlAttributeIntro = memberIntroConfig.getXmlAttribute();
-         if (xmlAttributeIntro != null)
-         {
-            proxy = XmlAttributeHandler.createProxy(xmlAttributeIntro);
-         }
-      }
-      else if (annotation == javax.xml.bind.annotation.XmlElement.class)
-      {
-         XmlElementIntro xmlElementIntro = memberIntroConfig.getXmlElement();
-         if (xmlElementIntro != null)
-         {
-            proxy = XmlElementHandler.createProxy(xmlElementIntro);
-         }
-      }
-
-      return proxy;
+	   return getAnnotationProxy(annotationType, memberIntroConfig, AVAILABLE_MEMBER_ANNOTATIONS);
    }
 
-   private Annotation getClassAnnotationProxy(Class annotation, ClassIntroConfig classIntroConfig)
+   private <T extends Annotation> T getClassAnnotationProxy(Class<T> annotationType, ClassIntroConfig classIntroConfig) 
    {
-      Annotation proxy = null;
+	   return getAnnotationProxy(annotationType, classIntroConfig, AVAILABLE_CLASS_ANNOTATIONS);
+   }
+   
+   private <T extends Annotation> T getAnnotationProxy(Class<T> annotation, Object introConfig, Set<Class<? extends Annotation>> availableAnnotations)
+   {
+	   T proxy = null;
 
-      if (annotation == javax.xml.bind.annotation.XmlAccessorType.class)
-      {
-         XmlAccessorTypeIntro xmlAccessorTypeIntro = classIntroConfig.getXmlAccessorType();
-         if (xmlAccessorTypeIntro != null)
-         {
-            proxy = XmlAccessorTypeHandler.createProxy(xmlAccessorTypeIntro);
-         }
-      }
-      else if (annotation == javax.xml.bind.annotation.XmlType.class)
-      {
-         XmlTypeIntro xmlTypeIntro = classIntroConfig.getXmlType();
-         if (xmlTypeIntro != null)
-         {
-            proxy = XmlTypeHandler.createProxy(xmlTypeIntro);
-         }
-      }
-      else if (annotation == javax.xml.bind.annotation.XmlRootElement.class)
-      {
-         XmlRootElementIntro xmlRootElementIntro = classIntroConfig.getXmlRootElement();
-         if (xmlRootElementIntro != null)
-         {
-            proxy = XmlRootElementHandler.createProxy(xmlRootElementIntro);
-         }
-      }
-
-      return proxy;
+	   if (availableAnnotations.contains(annotation)) {
+		   Object intro;
+		   intro = Util.getProperty(introConfig, annotation);
+		   if (intro != null) {
+			   proxy = annotation.cast(Handler.<T>createProxy(annotation, intro));
+		   }
+	   }
+	   return proxy;
    }
 
    private boolean isMemberAnnotationIntroAvailable(Class<? extends Annotation> annotation, ClassMemberIntroConfig memberIntroConfig)
    {
-      if (annotation == javax.xml.bind.annotation.XmlAttribute.class)
-      {
-         return (memberIntroConfig.getXmlAttribute() != null);
-      }
-      else if (annotation == javax.xml.bind.annotation.XmlElement.class)
-      {
-         return (memberIntroConfig.getXmlElement() != null);
-      }
-
-      return false;
+      return isAnnotationIntroAvailable(annotation, memberIntroConfig, AVAILABLE_MEMBER_ANNOTATIONS);
    }
 
    private boolean isClassAnnotationIntroAvailable(Class<? extends Annotation> annotation, ClassIntroConfig classIntroConfig)
    {
-      if (annotation == javax.xml.bind.annotation.XmlType.class)
-      {
-         return (classIntroConfig.getXmlType() != null);
-      }
-      else if (annotation == javax.xml.bind.annotation.XmlAccessorType.class)
-      {
-         return (classIntroConfig.getXmlAccessorType() != null);
-      }
-      else if (annotation == javax.xml.bind.annotation.XmlRootElement.class)
-      {
-         return (classIntroConfig.getXmlRootElement() != null);
-      }
-
-      return false;
+      return isAnnotationIntroAvailable(annotation, classIntroConfig, AVAILABLE_CLASS_ANNOTATIONS);
    }
 
-   private Annotation[] getAllAnnotations(Member member, Locatable srcPos)
+   private boolean isAnnotationIntroAvailable(Class<? extends Annotation> annotationType, Object introConfig, Set<Class<? extends Annotation>> availableAnnotations) {
+	   if (availableAnnotations.contains(annotationType)) {
+		   return Util.getProperty(introConfig, annotationType) != null;
+	   }
+	   return false;
+   }
+   
+   private Annotation[] getAllMemberAnnotations(Member member, Locatable srcPos)
    {
       Annotation[] r = ((AnnotatedElement)member).getAnnotations();
       List<Annotation> annotations = new ArrayList<Annotation>();
@@ -364,7 +366,7 @@ public class IntroductionsAnnotationReader extends AbstractInlineAnnotationReade
       for (int i = 0; i < r.length; i++)
       {
          Class<? extends Object> annType = r[i].getClass();
-         if (annType == XmlAttribute.class || annType == XmlElement.class)
+         if (AVAILABLE_MEMBER_ANNOTATIONS.contains(annType))
          {
             // We'll handle these explicitly (below)!!
             continue;
@@ -384,8 +386,9 @@ public class IntroductionsAnnotationReader extends AbstractInlineAnnotationReade
       }
       if (memberIntroConfig != null)
       {
-         addMemberAnnotation(XmlAttribute.class, memberIntroConfig, annotations, member, srcPos);
-         addMemberAnnotation(XmlElement.class, memberIntroConfig, annotations, member, srcPos);
+    	  for (Class<? extends Annotation> annotationType : AVAILABLE_MEMBER_ANNOTATIONS) {
+    		  addMemberAnnotation(annotationType, memberIntroConfig, annotations, member, srcPos);
+    	  }
       }
 
       r = annotations.toArray(new Annotation[annotations.size()]);
@@ -393,7 +396,7 @@ public class IntroductionsAnnotationReader extends AbstractInlineAnnotationReade
       return r;
    }
 
-   private void addMemberAnnotation(Class annotationType, ClassMemberIntroConfig memberIntroConfig, List<Annotation> annotations, Member member, Locatable srcPos)
+   private void addMemberAnnotation(Class<? extends Annotation> annotationType, ClassMemberIntroConfig memberIntroConfig, List<Annotation> annotations, Member member, Locatable srcPos)
    {
       Annotation annotation = getMemberAnnotationProxy(annotationType, memberIntroConfig);
       if (annotation != null)
@@ -410,7 +413,7 @@ public class IntroductionsAnnotationReader extends AbstractInlineAnnotationReade
       }
    }
 
-   private Annotation getProxy(Class annotation, Field field)
+   private Annotation getProxy(Class<? extends Annotation> annotation, Field field)
    {
       FieldIntroConfig fieldIntroConfig = getFieldIntroConfig(field);
 
@@ -426,13 +429,14 @@ public class IntroductionsAnnotationReader extends AbstractInlineAnnotationReade
       return null;
    }
 
-   private Annotation getProxy(Class annotation, Method method)
+
+private <T extends Annotation> T getProxy(Class<T> annotation, Method method)
    {
       MethodIntroConfig methodIntroConfig = getMethodIntroConfig(method);
 
       if (methodIntroConfig != null)
       {
-         Annotation proxy = getMemberAnnotationProxy(annotation, methodIntroConfig);
+         T proxy = getMemberAnnotationProxy(annotation, methodIntroConfig);
          if (proxy != null)
          {
             return proxy;
@@ -442,13 +446,13 @@ public class IntroductionsAnnotationReader extends AbstractInlineAnnotationReade
       return null;
    }
 
-   private Annotation getProxy(Class annotation, Class clazz)
+   private <T extends Annotation> T getProxy(Class<T> annotation, Class<?> clazz)
    {
       ClassIntroConfig classIntroConfig = getClassIntroConfig(clazz);
 
       if (classIntroConfig != null)
       {
-         Annotation proxy = getClassAnnotationProxy(annotation, classIntroConfig);
+         T proxy = getClassAnnotationProxy(annotation, classIntroConfig);
          if (proxy != null)
          {
             return proxy;
@@ -457,6 +461,4 @@ public class IntroductionsAnnotationReader extends AbstractInlineAnnotationReade
 
       return null;
    }
-
-
 }

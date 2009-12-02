@@ -19,12 +19,13 @@
  */
 package org.jboss.jaxb.intros;
 
-import org.jboss.jaxb.intros.configmodel.JaxbIntros;
+import java.io.InputStream;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
-import java.io.InputStream;
+
+import org.jboss.jaxb.intros.configmodel.JaxbIntros;
 
 /**
  * Configuration Parser for a JBossESB JAXB Annotations Introduction Configuration.

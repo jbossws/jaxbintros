@@ -16,20 +16,18 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for XmlElement complex type.
+ * <p>Java class for XmlElementWrapper complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="XmlElement">
+ * &lt;complexType name="XmlElementWrapper">
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;attribute name="name" type="{http://www.w3.org/2001/XMLSchema}anySimpleType" default="##default" />
- *       &lt;attribute name="nillable" type="{http://www.w3.org/2001/XMLSchema}boolean" default="false" />
- *       &lt;attribute name="required" type="{http://www.w3.org/2001/XMLSchema}boolean" default="false" />
  *       &lt;attribute name="namespace" type="{http://www.w3.org/2001/XMLSchema}anySimpleType" default="##default" />
- *       &lt;attribute name="defaultValue" type="{http://www.w3.org/2001/XMLSchema}anySimpleType" />
- *       &lt;attribute name="type" type="{http://www.w3.org/2001/XMLSchema}anySimpleType" />
+ *       &lt;attribute name="required" type="{http://www.w3.org/2001/XMLSchema}boolean" default="false" />
+ *       &lt;attribute name="nillable" type="{http://www.w3.org/2001/XMLSchema}boolean" default="false" />
  *     &lt;/restriction>
  *   &lt;/complexContent>
  * &lt;/complexType>
@@ -38,25 +36,19 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "XmlElement")
-public class XmlElementIntro {
+@XmlType(name = "XmlElementWrapper")
+public class XmlElementWrapperIntro {
 
     @XmlAttribute
     @XmlSchemaType(name = "anySimpleType")
     protected String name;
     @XmlAttribute
-    protected Boolean nillable;
-    @XmlAttribute
-    protected Boolean required;
-    @XmlAttribute
     @XmlSchemaType(name = "anySimpleType")
     protected String namespace;
     @XmlAttribute
-    @XmlSchemaType(name = "anySimpleType")
-    protected String defaultValue;
+    protected Boolean required;
     @XmlAttribute
-    @XmlSchemaType(name = "anySimpleType")
-    protected String type;
+    protected Boolean nillable;
 
     /**
      * Gets the value of the name property.
@@ -84,62 +76,6 @@ public class XmlElementIntro {
      */
     public void setName(String value) {
         this.name = value;
-    }
-
-    /**
-     * Gets the value of the nillable property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Boolean }
-     *     
-     */
-    public boolean isNillable() {
-        if (nillable == null) {
-            return false;
-        } else {
-            return nillable;
-        }
-    }
-
-    /**
-     * Sets the value of the nillable property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Boolean }
-     *     
-     */
-    public void setNillable(Boolean value) {
-        this.nillable = value;
-    }
-
-    /**
-     * Gets the value of the required property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Boolean }
-     *     
-     */
-    public boolean isRequired() {
-        if (required == null) {
-            return false;
-        } else {
-            return required;
-        }
-    }
-
-    /**
-     * Sets the value of the required property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Boolean }
-     *     
-     */
-    public void setRequired(Boolean value) {
-        this.required = value;
     }
 
     /**
@@ -171,51 +107,59 @@ public class XmlElementIntro {
     }
 
     /**
-     * Gets the value of the defaultValue property.
+     * Gets the value of the required property.
      * 
      * @return
      *     possible object is
-     *     {@link String }
+     *     {@link Boolean }
      *     
      */
-    public String getDefaultValue() {
-        return defaultValue;
+    public boolean isRequired() {
+        if (required == null) {
+            return false;
+        } else {
+            return required;
+        }
     }
 
     /**
-     * Sets the value of the defaultValue property.
+     * Sets the value of the required property.
      * 
      * @param value
      *     allowed object is
-     *     {@link String }
+     *     {@link Boolean }
      *     
      */
-    public void setDefaultValue(String value) {
-        this.defaultValue = value;
+    public void setRequired(Boolean value) {
+        this.required = value;
     }
 
     /**
-     * Gets the value of the type property.
+     * Gets the value of the nillable property.
      * 
      * @return
      *     possible object is
-     *     {@link String }
+     *     {@link Boolean }
      *     
      */
-    public String getType() {
-        return type;
+    public boolean isNillable() {
+        if (nillable == null) {
+            return false;
+        } else {
+            return nillable;
+        }
     }
 
     /**
-     * Sets the value of the type property.
+     * Sets the value of the nillable property.
      * 
      * @param value
      *     allowed object is
-     *     {@link String }
+     *     {@link Boolean }
      *     
      */
-    public void setType(String value) {
-        this.type = value;
+    public void setNillable(Boolean value) {
+        this.nillable = value;
     }
 
 }

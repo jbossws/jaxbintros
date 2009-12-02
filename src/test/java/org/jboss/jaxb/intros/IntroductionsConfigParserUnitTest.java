@@ -21,11 +21,11 @@ package org.jboss.jaxb.intros;
 
 import java.io.File;
 import java.io.IOException;
-import java.net.URL;
 
 import junit.framework.TestCase;
-import org.jboss.jaxb.intros.configmodel.JaxbIntros;
+
 import org.jboss.jaxb.intros.configmodel.ClassIntroConfig;
+import org.jboss.jaxb.intros.configmodel.JaxbIntros;
 
 /**
  * @author <a href="mailto:tom.fennelly@jboss.com">tom.fennelly@jboss.com</a>

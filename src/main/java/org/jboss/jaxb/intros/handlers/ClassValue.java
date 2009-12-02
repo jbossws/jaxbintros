@@ -32,7 +32,7 @@ import java.lang.annotation.Annotation;
 public interface ClassValue
 {
 
-   Class getClassValue(Annotation a, String name);
+   Class<?> getClassValue(Annotation a, String name);
 
-   Class[] getClassArrayValue(Annotation a, String name);
+   Class<?>[] getClassArrayValue(Annotation a, String name);
 }

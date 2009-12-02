@@ -14,15 +14,15 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for Method complex type.
+ * <p>Java class for XmlTransient complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="Method">
+ * &lt;complexType name="XmlTransient">
  *   &lt;complexContent>
- *     &lt;extension base="{http://www.jboss.org/xsd/jaxb/intros}class-member-intro-config">
- *     &lt;/extension>
+ *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
+ *     &lt;/restriction>
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
@@ -30,10 +30,8 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "Method")
-public class MethodIntroConfig
-    extends ClassMemberIntroConfig
-{
+@XmlType(name = "XmlTransient")
+public class XmlTransientIntro {
 
 
 }

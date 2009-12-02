@@ -23,6 +23,8 @@
             <xsd:element ref="jaxb-intros:XmlAccessorType" minOccurs="0" maxOccurs="1"/>
             <xsd:element ref="jaxb-intros:XmlType" minOccurs="0" maxOccurs="1"/>
             <xsd:element ref="jaxb-intros:XmlRootElement" minOccurs="0" maxOccurs="1"/>
+            <xsd:element ref="jaxb-intros:XmlTransient" minOccurs="0" maxOccurs="1"/>
+            <xsd:element ref="jaxb-intros:XmlJavaTypeAdapter" minOccurs="0" maxOccurs="1"/>
             <xsd:element ref="jaxb-intros:Field" minOccurs="0" maxOccurs="unbounded"/>
             <xsd:element ref="jaxb-intros:Method" minOccurs="0" maxOccurs="unbounded"/>
         </xsd:sequence>
@@ -42,6 +44,11 @@
         <xsd:sequence>
             <xsd:element ref="jaxb-intros:XmlElement" minOccurs="0" maxOccurs="1"/>
             <xsd:element ref="jaxb-intros:XmlAttribute" minOccurs="0" maxOccurs="1"/>
+            <xsd:element ref="jaxb-intros:XmlTransient" minOccurs="0" maxOccurs="1"/>
+            <xsd:element ref="jaxb-intros:XmlID" minOccurs="0" maxOccurs="1"/>
+            <xsd:element ref="jaxb-intros:XmlIDREF" minOccurs="0" maxOccurs="1"/>
+            <xsd:element ref="jaxb-intros:XmlElementWrapper" minOccurs="0" maxOccurs="1"/>
+            <xsd:element ref="jaxb-intros:XmlJavaTypeAdapter" minOccurs="0" maxOccurs="1"/>
         </xsd:sequence>
         <xsd:attribute name="name" use="required"/>
     </xsd:complexType>
@@ -127,6 +134,56 @@
     <xsd:element name="XmlAttribute" type="jaxb-intros:XmlAttribute">
         <xsd:annotation>
             <xsd:documentation xml:lang="en">JAXB 'XmlAttribute' Annotation Introduction configuration.
+            </xsd:documentation>
+        </xsd:annotation>
+    </xsd:element>
+
+    <xsd:complexType name="XmlTransient">
+    </xsd:complexType>
+    <xsd:element name="XmlTransient" type="jaxb-intros:XmlTransient">
+        <xsd:annotation>
+            <xsd:documentation xml:lang="en">JAXB 'XmlTransient' Annotation Introduction configuration.
+            </xsd:documentation>
+        </xsd:annotation>
+    </xsd:element>
+
+    <xsd:complexType name="XmlID">
+    </xsd:complexType>
+    <xsd:element name="XmlID" type="jaxb-intros:XmlID">
+        <xsd:annotation>
+            <xsd:documentation xml:lang="en">JAXB 'XmlID' Annotation Introduction configuration.
+            </xsd:documentation>
+        </xsd:annotation>
+    </xsd:element>
+
+    <xsd:complexType name="XmlIDREF">
+    </xsd:complexType>
+    <xsd:element name="XmlIDREF" type="jaxb-intros:XmlIDREF">
+        <xsd:annotation>
+            <xsd:documentation xml:lang="en">JAXB 'XmlIDREF' Annotation Introduction configuration.
+            </xsd:documentation>
+        </xsd:annotation>
+    </xsd:element>
+
+    <xsd:complexType name="XmlElementWrapper">
+    	<xsd:attribute name="name" use="optional" default="##default" />
+    	<xsd:attribute name="namespace" use="optional" default="##default" />
+    	<xsd:attribute name="required" use="optional" type="xsd:boolean" default="false" />
+    	<xsd:attribute name="nillable" use="optional" type="xsd:boolean" default="false"  />
+    </xsd:complexType>
+    <xsd:element name="XmlElementWrapper" type="jaxb-intros:XmlElementWrapper">
+        <xsd:annotation>
+            <xsd:documentation xml:lang="en">JAXB 'XmlElementWrapper' Annotation Introduction configuration.
+            </xsd:documentation>
+        </xsd:annotation>
+    </xsd:element>
+    <xsd:complexType name="XmlJavaTypeAdapter">
+    	<xsd:attribute name="value" use="required" />
+    	<xsd:attribute name="type" use="optional" />
+    </xsd:complexType>
+    <xsd:element name="XmlJavaTypeAdapter" type="jaxb-intros:XmlJavaTypeAdapter">
+        <xsd:annotation>
+            <xsd:documentation xml:lang="en">JAXB 'XmlJavaTypeAdapter' Annotation Introduction configuration.
             </xsd:documentation>
         </xsd:annotation>
     </xsd:element>

@@ -2,30 +2,56 @@ package org.jboss.jaxb.intros.testbeans;
 
 import java.io.Serializable;
 
-public class Party implements Serializable {
+public class Party implements Serializable
+{
 
-protected String company;
+   private static final long serialVersionUID = 1L;
 
-protected Contact contact;
+   protected String company;
 
-protected Address address;
-public Party(){}
+   protected Contact contact;
 
-public Party(String company, Contact contact, Address address){
-this.company=company;
-this.contact=contact;
-this.address=address;
-}
-public String getCompany() { return company ;}
+   protected Address address;
 
-public void setCompany(String company){ this.company=company; }
+   public Party()
+   {
+   }
 
-public Contact getContact() { return contact ;}
+   public Party(String company, Contact contact, Address address)
+   {
+      this.company = company;
+      this.contact = contact;
+      this.address = address;
+   }
 
-public void setContact(Contact contact){ this.contact=contact; }
+   public String getCompany()
+   {
+      return company;
+   }
 
-public Address getAddress() { return address ;}
+   public void setCompany(String company)
+   {
+      this.company = company;
+   }
 
-public void setAddress(Address address){ this.address=address; }
+   public Contact getContact()
+   {
+      return contact;
+   }
+
+   public void setContact(Contact contact)
+   {
+      this.contact = contact;
+   }
+
+   public Address getAddress()
+   {
+      return address;
+   }
+
+   public void setAddress(Address address)
+   {
+      this.address = address;
+   }
 
 }

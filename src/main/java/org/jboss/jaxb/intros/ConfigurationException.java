@@ -19,7 +19,6 @@
  */
 package org.jboss.jaxb.intros;
 
-import javax.xml.bind.JAXBException;
 
 /**
  * JAXB Introductions configuration error.
@@ -28,6 +27,8 @@ import javax.xml.bind.JAXBException;
  */
 public class ConfigurationException extends RuntimeException
 {
+   private static final long serialVersionUID = -1332063136124847578L;
+
    public ConfigurationException(String message)
    {
       super(message);
