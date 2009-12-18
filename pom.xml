@@ -8,13 +8,13 @@
   <artifactId>jboss-jaxb-intros</artifactId>
   <packaging>jar</packaging>
 
-  <version>1.0.2-SNAPSHOT</version>
+  <version>1.0.2.GA</version>
 
   <!-- Source Control Management -->
   <scm>
-    <connection>scm:svn:http://anonsvn.jboss.org/repos/jbossws/projects/jaxbintros/trunk</connection>
-    <developerConnection>scm:svn:https://svn.jboss.org/repos/jbossws/projects/jaxbintros/trunk</developerConnection>
-    <url>http://fisheye.jboss.com/viewrep/JBossWS/projects/jaxbintros/trunk</url>
+    <connection>scm:svn:http://anonsvn.jboss.org/repos/jbossws/projects/jaxbintros/tags/1.0.2.GA</connection>
+    <developerConnection>scm:svn:https://svn.jboss.org/repos/jbossws/projects/jaxbintros/tags/1.0.2.GA</developerConnection>
+    <url>http://fisheye.jboss.com/viewrep/JBossWS/projects/jaxbintros/tags/1.0.2.GA</url>
   </scm>
 
   <prerequisites>
