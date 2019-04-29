@@ -10,6 +10,13 @@
 
   <version>1.0.3-SNAPSHOT</version>
 
+  <organization>
+    <name>JBoss, by Red Hat</name>
+    <url>https://www.jboss.org</url>
+  </organization>
+
+  <url>https://www.jboss.org/jbossws</url>
+
   <!-- Source Control Management -->
   <scm>
     <connection>scm:git:https://github.com/jbossws/jaxbintros.git</connection>
@@ -18,6 +25,14 @@
     <tag>HEAD</tag>
   </scm>
 
+  <developers>
+    <developer>
+      <id>jboss.org</id>
+      <name>JBoss.org Developers</name>
+      <organization>JBoss.org</organization>
+      <organizationUrl>https://www.jboss.org</organizationUrl>
+    </developer>
+  </developers>
   
   <!-- IssueManagement -->
   <issueManagement>
