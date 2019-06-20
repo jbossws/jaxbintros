@@ -11,12 +11,11 @@
 
   <version>1.0.4-SNAPSHOT</version>
 
-  <organization>
-    <name>JBoss, by Red Hat</name>
-    <url>https://www.jboss.org</url>
-  </organization>
-
-  <url>https://www.jboss.org/jbossws</url>
+  <parent>
+    <groupId>org.jboss.ws</groupId>
+    <artifactId>jbossws-parent</artifactId>
+    <version>1.4.4.Final</version>
+  </parent>
 
   <!-- Source Control Management -->
   <scm>
@@ -25,15 +24,6 @@
     <url>https://github.com/jbossws/jaxbintros</url>
     <tag>HEAD</tag>
   </scm>
-
-  <developers>
-    <developer>
-      <id>jboss.org</id>
-      <name>JBoss.org Developers</name>
-      <organization>JBoss.org</organization>
-      <organizationUrl>https://www.jboss.org</organizationUrl>
-    </developer>
-  </developers>
   
   <!-- IssueManagement -->
   <issueManagement>
@@ -44,8 +34,9 @@
   <!-- licenses -->
   <licenses>
     <license>
-      <name>lgpl</name>
-      <url>http://repository.jboss.com/licenses/lgpl.txt</url>
+      <name>GNU Lesser General Public License v2.1 or later</name>
+      <url>http://repository.jboss.org/licenses/lgpl-2.1.txt</url>
+      <distribution>repo</distribution>
     </license>
   </licenses>
 
@@ -137,12 +128,10 @@
         <plugin>
           <groupId>org.codehaus.mojo</groupId>
           <artifactId>build-helper-maven-plugin</artifactId>
-          <version>1.1</version>
         </plugin>
         <plugin>
           <groupId>org.codehaus.mojo</groupId>
           <artifactId>buildnumber-maven-plugin</artifactId>
-          <version>1.0-beta-1</version>
         </plugin>
       </plugins>
     </pluginManagement>
