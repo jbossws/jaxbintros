@@ -27,7 +27,7 @@ import java.util.Map;
 
 import org.jboss.jaxb.intros.configmodel.JaxbIntros;
 
-import com.sun.xml.bind.api.JAXBRIContext;
+import org.glassfish.jaxb.runtime.api.JAXBRIContext;
 
 /**
  * A factory class that creates BindingCustomization instances using JAXBIntros.

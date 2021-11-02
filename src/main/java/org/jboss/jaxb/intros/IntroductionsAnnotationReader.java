@@ -35,16 +35,16 @@ import java.util.Map;
 import java.util.Set;
 import java.util.regex.Pattern;
 
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlElementWrapper;
-import javax.xml.bind.annotation.XmlID;
-import javax.xml.bind.annotation.XmlIDREF;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
-import javax.xml.bind.annotation.XmlType;
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlAttribute;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlElementWrapper;
+import jakarta.xml.bind.annotation.XmlID;
+import jakarta.xml.bind.annotation.XmlIDREF;
+import jakarta.xml.bind.annotation.XmlRootElement;
+import jakarta.xml.bind.annotation.XmlTransient;
+import jakarta.xml.bind.annotation.XmlType;
+import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -56,11 +56,11 @@ import org.jboss.jaxb.intros.configmodel.MethodIntroConfig;
 import org.jboss.jaxb.intros.handlers.ClassValue;
 import org.jboss.jaxb.intros.handlers.Handler;
 
-import com.sun.xml.bind.v2.model.annotation.AbstractInlineAnnotationReaderImpl;
-import com.sun.xml.bind.v2.model.annotation.Locatable;
-import com.sun.xml.bind.v2.model.annotation.LocatableAnnotation;
-import com.sun.xml.bind.v2.model.annotation.RuntimeAnnotationReader;
-import com.sun.xml.bind.v2.model.annotation.RuntimeInlineAnnotationReader;
+import org.glassfish.jaxb.runtime.v2.model.annotation.AbstractInlineAnnotationReaderImpl;
+import org.glassfish.jaxb.core.v2.model.annotation.Locatable;
+import org.glassfish.jaxb.runtime.v2.model.annotation.LocatableAnnotation;
+import org.glassfish.jaxb.runtime.v2.model.annotation.RuntimeAnnotationReader;
+import org.glassfish.jaxb.runtime.v2.model.annotation.RuntimeInlineAnnotationReader;
 
 /**
  * JAXB Annotation Reader for the JAXB RI context interface.
