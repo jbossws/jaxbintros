@@ -46,7 +46,7 @@
     <commons.logging.version>1.1.1</commons.logging.version>
     <junit.version>3.8.2</junit.version>
     <jaxb.api.version>3.0.1</jaxb.api.version>
-    <jaxb.impl.version>3.0.0</jaxb.impl.version>
+    <jaxb.impl.version>3.0.2</jaxb.impl.version>
   </properties>
 
   <!-- Dependencies -->
@@ -68,8 +68,8 @@
       <version>${jaxb.api.version}</version>
     </dependency>
     <dependency>
-      <groupId>com.sun.xml.bind</groupId>
-      <artifactId>jaxb-impl</artifactId>
+      <groupId>org.glassfish.jaxb</groupId>
+      <artifactId>jaxb-runtime</artifactId>
       <version>${jaxb.impl.version}</version>
     </dependency>
 
