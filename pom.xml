@@ -86,7 +86,7 @@
   <build>
     <resources>
       <resource>
-        <targetPath>../etc</targetPath>
+        <targetPath>./etc</targetPath>
         <directory>src/main/etc</directory>
         <filtering>true</filtering>
       </resource>
