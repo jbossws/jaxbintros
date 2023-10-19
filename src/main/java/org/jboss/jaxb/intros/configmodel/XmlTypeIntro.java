@@ -21,18 +21,20 @@ import jakarta.xml.bind.annotation.XmlType;
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="XmlType">
- *   &lt;complexContent>
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
- *       &lt;attribute name="name" type="{http://www.w3.org/2001/XMLSchema}anySimpleType" default="##default" />
- *       &lt;attribute name="propOrder" type="{http://www.w3.org/2001/XMLSchema}anySimpleType" default="" />
- *       &lt;attribute name="namespace" type="{http://www.w3.org/2001/XMLSchema}anySimpleType" default="##default" />
- *       &lt;attribute name="factoryClass" type="{http://www.w3.org/2001/XMLSchema}anySimpleType" />
- *       &lt;attribute name="factoryMethod" type="{http://www.w3.org/2001/XMLSchema}anySimpleType" default="" />
- *     &lt;/restriction>
- *   &lt;/complexContent>
- * &lt;/complexType>
- * </pre>
+ * {@code
+ * <complexType name="XmlType">
+ *   <complexContent>
+ *     <restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
+ *       <attribute name="name" type="{http://www.w3.org/2001/XMLSchema}anySimpleType" default="##default" />
+ *       <attribute name="propOrder" type="{http://www.w3.org/2001/XMLSchema}anySimpleType" default="" />
+ *       <attribute name="namespace" type="{http://www.w3.org/2001/XMLSchema}anySimpleType" default="##default" />
+ *       <attribute name="factoryClass" type="{http://www.w3.org/2001/XMLSchema}anySimpleType" />
+ *       <attribute name="factoryMethod" type="{http://www.w3.org/2001/XMLSchema}anySimpleType" default="" />
+ *     </restriction>
+ *   </complexContent>
+ * </complexType>
+ * }
+</pre>
  * 
  * 
  */

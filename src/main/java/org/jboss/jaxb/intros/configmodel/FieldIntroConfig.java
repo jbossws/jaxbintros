@@ -19,13 +19,16 @@ import jakarta.xml.bind.annotation.XmlType;
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="Field">
- *   &lt;complexContent>
- *     &lt;extension base="{http://www.jboss.org/xsd/jaxb/intros}class-member-intro-config">
- *     &lt;/extension>
- *   &lt;/complexContent>
- * &lt;/complexType>
- * </pre>
+ * {@code
+ * <complexType name="Field">
+ *   <complexContent>
+ *     <extension base="{http://www.jboss.org/xsd/jaxb/intros}class-member-intro-config">
+ *     </extension>
+ *   </complexContent>
+ * </complexType>
+ * }
+ * }
+</pre>
  * 
  * 
  */

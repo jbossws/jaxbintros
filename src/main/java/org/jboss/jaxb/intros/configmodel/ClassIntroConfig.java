@@ -24,23 +24,27 @@ import jakarta.xml.bind.annotation.XmlType;
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="Class">
- *   &lt;complexContent>
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
- *       &lt;sequence>
- *         &lt;element ref="{http://www.jboss.org/xsd/jaxb/intros}XmlAccessorType" minOccurs="0"/>
- *         &lt;element ref="{http://www.jboss.org/xsd/jaxb/intros}XmlType" minOccurs="0"/>
- *         &lt;element ref="{http://www.jboss.org/xsd/jaxb/intros}XmlRootElement" minOccurs="0"/>
- *         &lt;element ref="{http://www.jboss.org/xsd/jaxb/intros}XmlTransient" minOccurs="0"/>
- *         &lt;element ref="{http://www.jboss.org/xsd/jaxb/intros}XmlJavaTypeAdapter" minOccurs="0"/>
- *         &lt;element ref="{http://www.jboss.org/xsd/jaxb/intros}Field" maxOccurs="unbounded" minOccurs="0"/>
- *         &lt;element ref="{http://www.jboss.org/xsd/jaxb/intros}Method" maxOccurs="unbounded" minOccurs="0"/>
- *       &lt;/sequence>
- *       &lt;attribute name="name" use="required" type="{http://www.w3.org/2001/XMLSchema}anySimpleType" />
- *     &lt;/restriction>
- *   &lt;/complexContent>
- * &lt;/complexType>
- * </pre>
+ * {@code
+
+ * <complexType name="Class">
+ *   <complexContent>
+ *     <restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
+ *       <sequence>
+ *         <element ref="{http://www.jboss.org/xsd/jaxb/intros}XmlAccessorType" minOccurs="0"/>
+ *         <element ref="{http://www.jboss.org/xsd/jaxb/intros}XmlType" minOccurs="0"/>
+ *         <element ref="{http://www.jboss.org/xsd/jaxb/intros}XmlRootElement" minOccurs="0"/>
+ *         <element ref="{http://www.jboss.org/xsd/jaxb/intros}XmlTransient" minOccurs="0"/>
+ *         <element ref="{http://www.jboss.org/xsd/jaxb/intros}XmlJavaTypeAdapter" minOccurs="0"/>
+ *         <element ref="{http://www.jboss.org/xsd/jaxb/intros}Field" maxOccurs="unbounded" minOccurs="0"/>
+ *         <element ref="{http://www.jboss.org/xsd/jaxb/intros}Method" maxOccurs="unbounded" minOccurs="0"/>
+ *       </sequence>
+ *       <attribute name="name" use="required" type="{http://www.w3.org/2001/XMLSchema}anySimpleType" />
+ *     </restriction>
+ *   </complexContent>
+ * </complexType>
+ * }
+ * }
+</pre>
  * 
  * 
  */
@@ -206,8 +210,10 @@ public class ClassIntroConfig {
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
+ * {@code
      *    getField().add(newItem);
-     * </pre>
+     * }
+</pre>
      * 
      * 
      * <p>
@@ -235,8 +241,10 @@ public class ClassIntroConfig {
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
+ * {@code
      *    getMethod().add(newItem);
-     * </pre>
+     * }
+</pre>
      * 
      * 
      * <p>
