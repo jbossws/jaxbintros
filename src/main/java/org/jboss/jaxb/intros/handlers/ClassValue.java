@@ -22,8 +22,8 @@ import java.lang.annotation.Annotation;
 
 /**
  * Annotation Class Value interface.
- * <p/>
- * See same methods on the {@link com.sun.xml.bind.v2.model.annotation.AnnotationReader} interface.
+ * <p>
+ * See same methods on the {@link org.glassfish.jaxb.core.v2.model.annotation.AnnotationReader} interface
  * We want to proxy these calls back to the annotation handlers.
  *
  * @author <a href="mailto:tom.fennelly@jboss.com">tom.fennelly@jboss.com</a>

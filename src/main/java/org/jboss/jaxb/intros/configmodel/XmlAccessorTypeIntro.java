@@ -22,23 +22,26 @@ import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="XmlAccessorType">
- *   &lt;complexContent>
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
- *       &lt;attribute name="value" default="NONE">
- *         &lt;simpleType>
- *           &lt;restriction base="{http://www.w3.org/2001/XMLSchema}NMTOKEN">
- *             &lt;enumeration value="PROPERTY"/>
- *             &lt;enumeration value="FIELD"/>
- *             &lt;enumeration value="PUBLIC_MEMBER"/>
- *             &lt;enumeration value="NONE"/>
- *           &lt;/restriction>
- *         &lt;/simpleType>
- *       &lt;/attribute>
- *     &lt;/restriction>
- *   &lt;/complexContent>
- * &lt;/complexType>
- * </pre>
+ * {@code
+ * <complexType name="XmlAccessorType">
+ *   <complexContent>
+ *     <restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
+ *       <attribute name="value" default="NONE">
+ *         <simpleType>
+ *           <restriction base="{http://www.w3.org/2001/XMLSchema}NMTOKEN">
+ *             <enumeration value="PROPERTY"/>
+ *             <enumeration value="FIELD"/>
+ *             <enumeration value="PUBLIC_MEMBER"/>
+ *             <enumeration value="NONE"/>
+ *           </restriction>
+ *         </simpleType>
+ *       </attribute>
+ *     </restriction>
+ *   </complexContent>
+ * </complexType>
+ * }
+ * }
+</pre>
  * 
  * 
  */

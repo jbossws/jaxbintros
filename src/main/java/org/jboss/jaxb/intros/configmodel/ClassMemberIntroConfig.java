@@ -25,23 +25,26 @@ import jakarta.xml.bind.annotation.XmlType;
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="class-member-intro-config">
- *   &lt;complexContent>
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
- *       &lt;sequence>
- *         &lt;element ref="{http://www.jboss.org/xsd/jaxb/intros}XmlElement" minOccurs="0"/>
- *         &lt;element ref="{http://www.jboss.org/xsd/jaxb/intros}XmlAttribute" minOccurs="0"/>
- *         &lt;element ref="{http://www.jboss.org/xsd/jaxb/intros}XmlTransient" minOccurs="0"/>
- *         &lt;element ref="{http://www.jboss.org/xsd/jaxb/intros}XmlID" minOccurs="0"/>
- *         &lt;element ref="{http://www.jboss.org/xsd/jaxb/intros}XmlIDREF" minOccurs="0"/>
- *         &lt;element ref="{http://www.jboss.org/xsd/jaxb/intros}XmlElementWrapper" minOccurs="0"/>
- *         &lt;element ref="{http://www.jboss.org/xsd/jaxb/intros}XmlJavaTypeAdapter" minOccurs="0"/>
- *       &lt;/sequence>
- *       &lt;attribute name="name" use="required" type="{http://www.w3.org/2001/XMLSchema}anySimpleType" />
- *     &lt;/restriction>
- *   &lt;/complexContent>
- * &lt;/complexType>
- * </pre>
+ * {@code
+ * <complexType name="class-member-intro-config">
+ *   <complexContent>
+ *     <restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
+ *       <sequence>
+ *         <element ref="{http://www.jboss.org/xsd/jaxb/intros}XmlElement" minOccurs="0"/>
+ *         <element ref="{http://www.jboss.org/xsd/jaxb/intros}XmlAttribute" minOccurs="0"/>
+ *         <element ref="{http://www.jboss.org/xsd/jaxb/intros}XmlTransient" minOccurs="0"/>
+ *         <element ref="{http://www.jboss.org/xsd/jaxb/intros}XmlID" minOccurs="0"/>
+ *         <element ref="{http://www.jboss.org/xsd/jaxb/intros}XmlIDREF" minOccurs="0"/>
+ *         <element ref="{http://www.jboss.org/xsd/jaxb/intros}XmlElementWrapper" minOccurs="0"/>
+ *         <element ref="{http://www.jboss.org/xsd/jaxb/intros}XmlJavaTypeAdapter" minOccurs="0"/>
+ *       </sequence>
+ *       <attribute name="name" use="required" type="{http://www.w3.org/2001/XMLSchema}anySimpleType" />
+ *     </restriction>
+ *   </complexContent>
+ * </complexType>
+ * }
+ * }
+</pre>
  * 
  * 
  */

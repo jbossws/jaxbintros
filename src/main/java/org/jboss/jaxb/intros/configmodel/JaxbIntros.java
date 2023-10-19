@@ -25,17 +25,19 @@ import jakarta.xml.bind.annotation.XmlType;
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType>
- *   &lt;complexContent>
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
- *       &lt;sequence>
- *         &lt;element ref="{http://www.jboss.org/xsd/jaxb/intros}Class" maxOccurs="unbounded"/>
- *       &lt;/sequence>
- *       &lt;attribute name="default-namespace" type="{http://www.w3.org/2001/XMLSchema}anySimpleType" />
- *     &lt;/restriction>
- *   &lt;/complexContent>
- * &lt;/complexType>
- * </pre>
+ * {@code
+ * <complexType>
+ *   <complexContent>
+ *     <restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
+ *       <sequence>
+ *         <element ref="{http://www.jboss.org/xsd/jaxb/intros}Class" maxOccurs="unbounded"/>
+ *       </sequence>
+ *       <attribute name="default-namespace" type="{http://www.w3.org/2001/XMLSchema}anySimpleType" />
+ *     </restriction>
+ *   </complexContent>
+ * </complexType>
+ * }
+</pre>
  * 
  * 
  */
@@ -64,8 +66,10 @@ public class JaxbIntros {
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
+ * {@code
      *    getClazz().add(newItem);
-     * </pre>
+     * }
+</pre>
      * 
      * 
      * <p>

@@ -63,7 +63,7 @@ import org.glassfish.jaxb.runtime.v2.model.annotation.RuntimeInlineAnnotationRea
 
 /**
  * JAXB Annotation Reader for the JAXB RI context interface.
- * <p/>
+ * <p>
  * Used for introduction of annotations on bean classes which are not annotated
  * for JAXB.  Allows us to use JAXB (and hence JBossWS 2.x+) with unannotated
  * interfaces.
