@@ -47,11 +47,12 @@
     <junit.version>3.8.2</junit.version>
     <jaxb.api.version>3.0.1</jaxb.api.version>
     <jaxb.impl.version>3.0.2</jaxb.impl.version>
+    <maven.javadoc.skip>false</maven.javadoc.skip>
   </properties>
 
   <!-- Dependencies -->
   <dependencies>
-  
+
     <dependency>
       <groupId>commons-beanutils</groupId>
       <artifactId>commons-beanutils</artifactId>
@@ -81,7 +82,7 @@
       <scope>test</scope>
     </dependency>
   </dependencies>
-  
+
   <!-- Plugins -->
   <build>
     <resources>
@@ -111,6 +112,18 @@
               <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
             </manifest>
           </archive>
+        </configuration>
+      </plugin>
+      <plugin>
+        <artifactId>maven-javadoc-plugin</artifactId>
+        <configuration>
+          <attach>true</attach>
+          <source>8</source>
+          <quiet>true</quiet>
+          <encoding>UTF-8</encoding>
+          <detectOfflineLinks>false</detectOfflineLinks>
+          <notimestamp>true</notimestamp>
+          <doclint>none</doclint>
         </configuration>
       </plugin>
       <plugin>
