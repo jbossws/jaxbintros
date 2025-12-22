@@ -3,18 +3,21 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
-  <name>JBoss JAXB Introductions</name>
   <groupId>jboss.jaxbintros</groupId>
   <artifactId>jboss-jaxb-intros</artifactId>
   <packaging>jar</packaging>
-  <description>JBossWS JAXB Introductions</description>
+
+  <name>JBoss Web Services - JBoss JAXB Introductions</name>
+  <description>JBoss Web Services - JBossWS JAXB Introductions</description>
+  <url>https://github.com/jbossws/jaxbintros</url>
 
   <version>2.0.2-SNAPSHOT</version>
 
+  <!-- Parent -->
   <parent>
     <groupId>org.jboss.ws</groupId>
     <artifactId>jbossws-parent</artifactId>
-    <version>1.4.4.Final</version>
+    <version>2.1.1.Final</version>
   </parent>
 
   <!-- Source Control Management -->
@@ -22,7 +25,7 @@
     <connection>scm:git:https://github.com/jbossws/jaxbintros.git</connection>
     <developerConnection>scm:git:https://github.com/jbossws/jaxbintros.git</developerConnection>
     <url>https://github.com/jbossws/jaxbintros</url>
-    <tag>HEAD</tag>
+    <tag>${nexus.staging.tag}</tag>
   </scm>
   
   <!-- IssueManagement -->
@@ -30,6 +33,18 @@
     <system>jira</system>
     <url>https://jira.jboss.org/jira/browse/JBWS</url>
   </issueManagement>
+
+  <!-- Properties -->
+  <properties>
+    <!-- Repository Deployment Settings -->
+    <nexus.staging.tag>jaxbintros-${project.version}</nexus.staging.tag>
+    <!-- Dependency versions -->
+    <commons.beanutils.version>1.8.0</commons.beanutils.version>
+    <commons.logging.version>1.1.1</commons.logging.version>
+    <junit.version>3.8.2</junit.version>
+    <jaxb.api.version>3.0.1</jaxb.api.version>
+    <jaxb.impl.version>3.0.2</jaxb.impl.version>
+  </properties>
 
   <!-- licenses -->
   <licenses>
@@ -40,18 +55,8 @@
     </license>
   </licenses>
 
-  <!-- Properties -->
-  <properties>
-    <commons.beanutils.version>1.8.0</commons.beanutils.version>
-    <commons.logging.version>1.1.1</commons.logging.version>
-    <junit.version>3.8.2</junit.version>
-    <jaxb.api.version>3.0.1</jaxb.api.version>
-    <jaxb.impl.version>3.0.2</jaxb.impl.version>
-  </properties>
-
   <!-- Dependencies -->
   <dependencies>
-  
     <dependency>
       <groupId>commons-beanutils</groupId>
       <artifactId>commons-beanutils</artifactId>
