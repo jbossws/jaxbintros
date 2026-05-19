@@ -39,7 +39,7 @@
     <!-- Repository Deployment Settings -->
     <nexus.staging.tag>jaxbintros-${project.version}</nexus.staging.tag>
     <!-- Dependency versions -->
-    <commons.beanutils.version>1.8.0</commons.beanutils.version>
+    <commons.beanutils.version>1.11.0</commons.beanutils.version>
     <commons.logging.version>1.3.6</commons.logging.version>
     <junit.version>4.13.2</junit.version>
     <jaxb.api.version>3.0.1</jaxb.api.version>
