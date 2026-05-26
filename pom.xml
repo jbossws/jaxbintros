@@ -11,7 +11,7 @@
   <description>JBoss Web Services - JBossWS JAXB Introductions</description>
   <url>https://github.com/jbossws/jaxbintros</url>
 
-  <version>2.1.0.Beta2-SNAPSHOT</version>
+  <version>2.1.0.Final</version>
 
   <!-- Parent -->
   <parent>
@@ -25,7 +25,7 @@
     <connection>scm:git:https://github.com/jbossws/jaxbintros.git</connection>
     <developerConnection>scm:git:https://github.com/jbossws/jaxbintros.git</developerConnection>
     <url>https://github.com/jbossws/jaxbintros</url>
-    <tag>${nexus.staging.tag}</tag>
+    <tag>jboss-jaxb-intros-2.1.0.Final</tag>
   </scm>
   
   <!-- IssueManagement -->
